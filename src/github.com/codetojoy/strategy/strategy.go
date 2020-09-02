@@ -6,19 +6,28 @@ import (
 )
 
 type Strategy interface {
-    SelectCard(prizeCard int, cards []int, maxCard int) int
+    SelectCard(prizeCard int, cards []int, max int) int
 }
 
 func BuildStrategy(which string) Strategy {
     var result Strategy
 
+    const HYBRID = "Hybrid"
     const NEAREST_CARD = "NearestCard"
     const NEXT_CARD = "NextCard"
+    const MAX_CARD = "MaxCard"
+    const MIN_CARD = "MinCard"
 
-    if strings.EqualFold(NEXT_CARD, which) {
+    if strings.EqualFold(HYBRID, which) {
+        result = hybridCard{}
+    } else if strings.EqualFold(NEXT_CARD, which) {
         result = nextCard{}
     } else if strings.EqualFold(NEAREST_CARD, which) {
         result = nearestCard{}
+    } else if strings.EqualFold(MAX_CARD, which) {
+        result = maxCard{}
+    } else if strings.EqualFold(MIN_CARD, which) {
+        result = minCard{}
     }
 
     return result
@@ -27,7 +36,7 @@ func BuildStrategy(which string) Strategy {
 type nextCard struct {
 }
 
-func (nc nextCard) SelectCard(prizeCard int, cards []int, maxCard int) int {
+func (nc nextCard) SelectCard(prizeCard int, cards []int, max int) int {
     return cards[0]
 }
 
@@ -44,9 +53,9 @@ func absValue(x int) int {
     return result
 }
 
-func (nc nearestCard) SelectCard(prizeCard int, cards []int, maxCard int) int {
+func (nc nearestCard) SelectCard(prizeCard int, cards []int, max int) int {
     result := 0
-    bestAbsValue := maxCard * 10
+    bestAbsValue := max * 10
 
     for _, card := range cards {
         thisAbsValue := absValue(card - prizeCard)
@@ -56,6 +65,54 @@ func (nc nearestCard) SelectCard(prizeCard int, cards []int, maxCard int) int {
             result = card
         }
     }
+
+    return result
+}
+
+type maxCard struct {
+}
+
+func (mc maxCard) SelectCard(prizeCard int, cards []int, maxCard int) int {
+    result := 0
+
+    for _, card := range cards {
+        if card > result {
+            result = card
+        }
+    }
+
+    return result
+}
+
+type minCard struct {
+}
+
+func (mc minCard) SelectCard(prizeCard int, cards []int, maxCard int) int {
+    result := maxCard * 10
+
+    for _, card := range cards {
+        if card < result {
+            result = card
+        }
+    }
+
+    return result
+}
+
+type hybridCard struct {
+}
+
+func (hc hybridCard) SelectCard(prizeCard int, cards []int, max int) int {
+
+    var s Strategy
+
+    if prizeCard > (max / 2) {
+        s = maxCard{}
+    } else {
+        s = minCard{}
+    }
+
+    result := s.SelectCard(prizeCard, cards, max)
 
     return result
 }
