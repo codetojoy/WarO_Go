@@ -38,10 +38,6 @@ func (player *Player) SetHand(hand Hand) {
     player.hand = hand
 }
 
-func (player *Player) GetCardsForTesting() []int {
-    return player.hand.GetCards()
-}
-
 func (player *Player) GetName() string {
     return player.name
 }
@@ -59,4 +55,16 @@ func (player *Player) String() string {
     result.WriteString(fmt.Sprintf("%s ", player.hand.String()))
 
     return result.String()
+}
+
+// -------- for test
+
+func BuildPlayerForTesting(name string, cards []int) Player {
+    player := NewPlayer(name)
+    player.SetHand(NewHand(cards))
+    return player
+}
+
+func (player *Player) GetCardsForTesting() []int {
+    return player.hand.GetCards()
 }

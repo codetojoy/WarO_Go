@@ -2,7 +2,6 @@
 package casino
 
 import (
-    // "fmt"
     "math/rand"
     "time"
 
