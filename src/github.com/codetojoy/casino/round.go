@@ -20,11 +20,11 @@ func playRound(kitty *player.Hand, players []player.Player, maxCard int) {
         fmt.Printf("TRACER playRound %v bids %v on %v\n", bid.Player.GetName(), bid.Offer, bid.PrizeCard)
     }
     kitty.RemoveCard(prizeCard)
-    winningBid := determineWinner(bids)
+    winningBid := determineRoundWinner(bids)
     winningBid.Player.WinsRound(prizeCard)
 }
 
-func determineWinner(bids []player.Bid) *player.Bid {
+func determineRoundWinner(bids []player.Bid) *player.Bid {
     result := &bids[0]
     bestOffer := result.Offer
 

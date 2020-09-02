@@ -61,6 +61,15 @@ func (player *Player) WinsRound(prizeCard int) {
     player.PlayerStats.NumRoundsWon += 1
 }
 
+func (player *Player) WinsGame() {
+    player.PlayerStats.NumGamesWon += 1
+}
+
+func (player *Player) NewGame() {
+    player.PlayerStats.GameTotal = 0
+    player.PlayerStats.NumRoundsWon = 0
+}
+
 func (player *Player) String() string {
     result := strings.Builder{}
 

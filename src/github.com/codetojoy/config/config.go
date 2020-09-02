@@ -16,7 +16,7 @@ type Config struct {
 func NewConfig() Config {
     const numCards = 12
     const numPlayers = 3
-    const numGames = 1
+    const numGames = 10
     // numPlayers + 1 because of kitty
     const numCardsPerHand = numCards / (numPlayers + 1)
     const maxCard = numCards

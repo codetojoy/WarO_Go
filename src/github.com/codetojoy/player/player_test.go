@@ -5,6 +5,19 @@ import (
     "testing"
 )
 
+func TestWinsGame(t *testing.T) {
+    player := NewPlayer("mozart")
+
+    // test
+    player.WinsGame()
+
+    ok := (player.PlayerStats.NumGamesWon == 1)
+
+    if ! ok {
+        t.Errorf("WinsGame error")
+    }
+}
+
 func TestWinsRound(t *testing.T) {
     const prizeCard = 10
     player := NewPlayer("mozart")
@@ -16,7 +29,7 @@ func TestWinsRound(t *testing.T) {
     ok := (playerStats.GameTotal == prizeCard) && (playerStats.NumRoundsWon == 1)
 
     if ! ok {
-        t.Errorf("Wins Round error")
+        t.Errorf("WinsRound error")
     }
 }
 

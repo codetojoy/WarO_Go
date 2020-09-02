@@ -56,7 +56,7 @@ func TestPlayRound(t *testing.T) {
     }
 }
 
-func TestDetermineWinner(t *testing.T) {
+func TestDetermineRoundWinner(t *testing.T) {
     const prizeCard = 10
     p1 := player.BuildPlayerForTesting("beethoven", []int{/* 3, */2,1})
     p2 := player.BuildPlayerForTesting("chopin", []int{/* 4, */5,6})
@@ -68,13 +68,12 @@ func TestDetermineWinner(t *testing.T) {
     bids := []player.Bid{bid1, bid2, bid3}
 
     // test
-    result := determineWinner(bids)
+    result := determineRoundWinner(bids)
 
     // TODO: figure out how to use test-assert library (see README.md)
-    resultBid := *result
-    ok := resultBid.Offer == 9 && (*resultBid.Player).GetName() == "mozart" && resultBid.PrizeCard == 10
+    ok := (result.Offer == 9) && (result.Player.GetName() == "mozart") && (result.PrizeCard == 10)
 
     if ! ok {
-        t.Errorf("determineWinner() error")
+        t.Errorf("determineRoundWinner() error")
     }
 }
