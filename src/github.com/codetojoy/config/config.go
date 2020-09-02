@@ -26,6 +26,16 @@ func NewConfig() Config {
                     MaxCard: maxCard}
 }
 
+func NewConfigForTesting(numCards int, numPlayers int, numGames int) Config {
+    // numPlayers + 1 because of kitty
+    numCardsPerHand := numCards / (numPlayers + 1)
+    maxCard := numCards
+
+    return Config{NumCards: numCards, NumGames: numGames,
+                    NumPlayers: numPlayers, NumCardsPerHand: numCardsPerHand,
+                    MaxCard: maxCard}
+}
+
 func (config *Config) String() string {
     return fmt.Sprintf("numCards: %d numGames: %d numPlayers: %d", config.NumCards,
             config.NumGames, config.NumPlayers)

@@ -3,6 +3,9 @@ package casino
 
 import (
     "testing"
+
+    "github.com/codetojoy/config"
+    "github.com/codetojoy/player"
 )
 
 func TestNewDeck(t *testing.T) {
@@ -92,6 +95,36 @@ func TestPartition(t *testing.T) {
 
         if ! (ok && (sum == c.sumCheck) && (count == len(c.cards))) {
             t.Errorf("partition() == %v, sumCheck %v", result, c.sumCheck)
+        }
+    }
+}
+
+func TestDeal(t *testing.T) {
+    const numCards = 12
+    const numPlayers = 3
+    const numGames = 1
+    config := config.NewConfigForTesting(numCards, numPlayers, numGames)
+
+    p1 := player.NewPlayer("beethoven")
+    p2 := player.NewPlayer("chopin")
+    p3 := player.NewPlayer("mozart")
+
+    players := []player.Player{p1, p2, p3}
+
+    // test
+    result := Deal(config, players)
+
+    ok := len(result.kitty.GetCards()) == config.NumCardsPerHand
+
+    if ! ok {
+        t.Errorf("Deal() error with kitty")
+    } else {
+        for _, player := range result.players {
+            ok = len(player.GetCardsForTesting()) == config.NumCardsPerHand
+
+            if ! ok {
+                t.Errorf("Deal() error with player: %v", player.GetName())
+            }
         }
     }
 }
