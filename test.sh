@@ -15,8 +15,13 @@ cd $ROOT_DIR/player
 go test -test.v
 PLAYER_RESULT=$?
 
+cd $ROOT_DIR/strategy
+go test -test.v
+STRATEGY_RESULT=$?
+
 echo -e "\nTRACER casino ${CASINO_RESULT}\n"
 echo -e "TRACER player ${PLAYER_RESULT}\n"
+echo -e "TRACER strategy ${STRATEGY_RESULT}\n"
 
 cd $HOME_DIR
 echo "Ready."

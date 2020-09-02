@@ -17,7 +17,7 @@ type Player struct {
 }
 
 func NewPlayer(name string) Player {
-    return Player{name: name, strategy: strategy.NextCard{}}
+    return Player{name: name, strategy: strategy.BuildStrategy("NextCard")}
 }
 
 func BuildPlayers(config config.Config) []Player {
