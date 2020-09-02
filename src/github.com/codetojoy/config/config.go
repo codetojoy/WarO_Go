@@ -1,6 +1,10 @@
 
 package config
 
+import (
+    "fmt"
+)
+
 type Config struct {
     NumCards int
     NumGames int
@@ -20,4 +24,9 @@ func NewConfig() Config {
     return Config{NumCards: numCards, NumGames: numGames,
                     NumPlayers: numPlayers, NumCardsPerHand: numCardsPerHand,
                     MaxCard: maxCard}
+}
+
+func (config *Config) String() string {
+    return fmt.Sprintf("numCards: %d numGames: %d numPlayers: %d", config.NumCards,
+            config.NumGames, config.NumPlayers)
 }

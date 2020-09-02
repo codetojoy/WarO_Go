@@ -29,3 +29,6 @@ TODO:
 * testing private methods? do they have to be exported ?
 * idiomatic `go doc`
 * idiomatic code format (use `go fmt`)
+* use JSON for configuration
+* use interface for strategies 
+
