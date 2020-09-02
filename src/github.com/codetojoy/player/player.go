@@ -56,6 +56,11 @@ func (player *Player) GetOffer(prizeCard int, maxCard int) int {
     return offer
 }
 
+func (player *Player) WinsRound(prizeCard int) {
+    player.PlayerStats.GameTotal += prizeCard
+    player.PlayerStats.NumRoundsWon += 1
+}
+
 func (player *Player) String() string {
     result := strings.Builder{}
 

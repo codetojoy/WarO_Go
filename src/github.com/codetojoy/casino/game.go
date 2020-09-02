@@ -16,4 +16,6 @@ func PlayGame(config config.Config, players []player.Player) {
         fmt.Printf("\nTRACER PlayGame round %d table: \n%v\n\n", i, table.String())
         PlayRound(config, &table)
     }
+
+    fmt.Printf("\nTRACER PlayGame ENDGAME table: \n%v\n\n", table.String())
 }

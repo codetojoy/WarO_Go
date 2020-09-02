@@ -5,6 +5,21 @@ import (
     "testing"
 )
 
+func TestWinsRound(t *testing.T) {
+    const prizeCard = 10
+    player := NewPlayer("mozart")
+
+    // test
+    player.WinsRound(prizeCard)
+
+    playerStats := player.PlayerStats
+    ok := (playerStats.GameTotal == prizeCard) && (playerStats.NumRoundsWon == 1)
+
+    if ! ok {
+        t.Errorf("Wins Round error")
+    }
+}
+
 func TestGetOffer(t *testing.T) {
     cases := []struct {
         inCards []int

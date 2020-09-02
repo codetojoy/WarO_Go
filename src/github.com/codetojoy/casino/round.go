@@ -20,11 +20,8 @@ func playRound(kitty *player.Hand, players []player.Player, maxCard int) {
         fmt.Printf("TRACER playRound %v bids %v on %v\n", bid.Player.GetName(), bid.Offer, bid.PrizeCard)
     }
     kitty.RemoveCard(prizeCard)
-    winner := determineWinner(bids)
-    updateWinner((*winner).Player)
-}
-
-func updateWinner(player *player.Player) {
+    winningBid := determineWinner(bids)
+    winningBid.Player.WinsRound(prizeCard)
 }
 
 func determineWinner(bids []player.Bid) *player.Bid {
@@ -34,7 +31,7 @@ func determineWinner(bids []player.Bid) *player.Bid {
     // TODO: I don't know yet if Go has a functional 'filter'
     for index := range bids {
         thisBid := &bids[index]
-        thisOffer := (*thisBid).Offer
+        thisOffer := thisBid.Offer
         if thisOffer > bestOffer {
             bestOffer = thisOffer
             result = thisBid
