@@ -26,6 +26,7 @@ TODO:
     - e.g. to use a 3rd-party package such as: https://github.com/stretchr/testify
     - Since this is functional, I have to move on, as I'm more interested in
       the language than the insufferable module/package system.
+* consider new `players` package for functions on a plurality of players
 * revisit passing pointers, esp. for Player 
 * testing private methods? do they have to be exported ?
     - `TestFoo` for `foo` seems to work OK
