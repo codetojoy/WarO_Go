@@ -26,7 +26,9 @@ TODO:
     - e.g. to use a 3rd-party package such as: https://github.com/stretchr/testify
     - Since this is functional, I have to move on, as I'm more interested in
       the language than the insufferable module/package system.
+* revisit passing pointers, esp. for Player 
 * testing private methods? do they have to be exported ?
+    - `TestFoo` for `foo` seems to work OK
 * idiomatic `go doc`
 * idiomatic code format (use `go fmt`)
 * use JSON for configuration

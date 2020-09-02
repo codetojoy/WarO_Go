@@ -13,9 +13,7 @@ type Player struct {
     name string
     hand Hand
     strategy strategy.Strategy
-    gameTotal int
-    numRoundsWon int
-    numGamesWon int
+    PlayerStats PlayerStats
 }
 
 func NewPlayer(name string) Player {
@@ -42,6 +40,16 @@ func (player *Player) GetName() string {
     return player.name
 }
 
+func (player *Player) LogCards(prefix string) {
+    fmt.Printf("TRACER logCards %v %v cards: %v\n", prefix, player.name, player.hand.GetCards())
+}
+
+func LogCardsForPlayers(players []Player, prefix string) {
+    for _, player := range players {
+        player.LogCards(prefix)
+    }
+}
+
 func (player *Player) GetOffer(prizeCard int, maxCard int) int {
     offer := player.strategy.SelectCard(prizeCard, player.hand.GetCards(), maxCard)
     player.hand.RemoveCard(offer)
@@ -52,6 +60,7 @@ func (player *Player) String() string {
     result := strings.Builder{}
 
     result.WriteString(fmt.Sprintf("%s : ", player.name))
+    result.WriteString(fmt.Sprintf("%s ", player.PlayerStats.String()))
     result.WriteString(fmt.Sprintf("%s ", player.hand.String()))
 
     return result.String()
