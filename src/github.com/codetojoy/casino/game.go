@@ -8,7 +8,7 @@ import (
     "github.com/codetojoy/player"
 )
 
-func PlayGame(config config.Config, players []player.Player) {
+func playGame(config config.Config, players []player.Player) {
 
     table := Deal(config, players)
 
@@ -19,7 +19,7 @@ func PlayGame(config config.Config, players []player.Player) {
 
     for i := 0; i < config.NumCardsPerHand; i++ {
         fmt.Printf("\nTRACER PlayGame round %d table: \n%v\n\n", i, table.String())
-        PlayRound(config, &table)
+        playRound(config, &table)
     }
 
     winner := determineGameWinner(players)

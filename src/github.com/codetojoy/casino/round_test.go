@@ -31,7 +31,7 @@ func TestGetBids(t *testing.T) {
     }
 }
 
-func TestPlayRound(t *testing.T) {
+func TestPlayRoundSimple(t *testing.T) {
     const maxCard = 12
 
     kitty := player.NewHand([]int{10,11,12})
@@ -43,7 +43,7 @@ func TestPlayRound(t *testing.T) {
     players := []player.Player{p1, p2, p3}
 
     // test
-    playRound(&kitty, players, maxCard)
+    playRoundSimple(&kitty, players, maxCard)
 
     // TODO: figure out how to use test-assert library (see README.md)
     ok := len(kitty.GetCards()) == 2

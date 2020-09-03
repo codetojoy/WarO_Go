@@ -8,12 +8,13 @@ import (
     "github.com/codetojoy/player"
 )
 
-func PlayRound(config config.Config, table *Table) {
-    playRound(&table.kitty, table.players, config.MaxCard)
+func playRound(config config.Config, table *Table) {
+    playRoundSimple(&table.kitty, table.players, config.MaxCard)
     fmt.Printf("---\n")
 }
 
-func playRound(kitty *player.Hand, players []player.Player, maxCard int) {
+// "simple" in the sense of params with simpler levels of nesting
+func playRoundSimple(kitty *player.Hand, players []player.Player, maxCard int) {
     prizeCard := kitty.GetCards()[0]
     bids := getBids(prizeCard, players, maxCard)
     for _, bid := range bids {

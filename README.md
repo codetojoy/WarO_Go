@@ -27,9 +27,8 @@ TODO:
     - Since this is functional, I have to move on, as I'm more interested in
       the language than the insufferable module/package system.
 * consider new `players` package for functions on a plurality of players
+* revisit public functions
 * revisit passing pointers, esp. for Player 
-* testing private methods? do they have to be exported ?
-    - `TestFoo` for `foo` seems to work OK
 * idiomatic `go doc`
 * idiomatic code format (use `go fmt`)
 * use JSON for configuration

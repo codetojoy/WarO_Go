@@ -10,7 +10,7 @@ import (
 
 func PlayTourney(config config.Config, players []player.Player) {
     for i := 0; i < config.NumGames; i++ {
-        PlayGame(config, players)
+        playGame(config, players)
     }
 
     winner := determineTourneyWinner(players)
