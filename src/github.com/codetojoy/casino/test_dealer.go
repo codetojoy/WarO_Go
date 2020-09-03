@@ -8,10 +8,16 @@ import (
 
 // 'proper' vs 'testing'
 type TestDealer struct {
+    deckProvider DeckProvider
+}
+
+func NewTestDealer(deckProvider DeckProvider) TestDealer {
+    return TestDealer{deckProvider: deckProvider}
 }
 
 func (testDealer TestDealer) deal(config config.Config, players []player.Player) Table {
-    deck := newDeck(config.NumCards)
+    deck := testDealer.deckProvider.newDeck(config.NumCards)
+    // we don't want random functionality in tests:
     // deck = shuffle(deck)
     hands := partition(deck, config.NumCardsPerHand)
     var kitty player.Kitty

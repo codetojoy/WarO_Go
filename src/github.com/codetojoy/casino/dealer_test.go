@@ -8,34 +8,6 @@ import (
     "github.com/codetojoy/player"
 )
 
-func TestNewDeck(t *testing.T) {
-    cases := []struct {
-        in int
-        expected []int
-    }{
-        {7, []int{1,2,3,4,5,6,7}},
-    }
-
-    for _, c := range cases {
-        // test
-        result := newDeck(c.in)
-
-        ok := len(c.expected) == len(result)
-
-        if ok {
-            for i := 0; i < len(result); i++ {
-                if ok && result[i] != c.expected[i] {
-                    ok = false
-                }
-            }
-        }
-
-        if ! ok {
-            t.Errorf("newDeck() == %v, expected %v", result, c.expected)
-        }
-    }
-}
-
 func TestShuffle(t *testing.T) {
     cases := []struct {
         in []int
@@ -111,7 +83,8 @@ func TestDeal(t *testing.T) {
 
     players := []player.Player{p1, p2, p3}
 
-    dealer := ProperDealer{}
+    deckProvider := SimpleDeckProvider{}
+    dealer := NewProperDealer(deckProvider)
 
     // test
     result := dealer.deal(config, players)

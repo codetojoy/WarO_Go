@@ -8,7 +8,7 @@ import (
     "github.com/codetojoy/player"
 )
 
-func TestPlayTourneyWinner(t *testing.T) {
+func TestPlayTourneyWinnerCase1(t *testing.T) {
     p1 := player.NewPlayer("beethoven")
     p2 := player.NewPlayer("chopin")
     p3 := player.NewPlayer("mozart")
@@ -20,7 +20,8 @@ func TestPlayTourneyWinner(t *testing.T) {
     const numGames = 10
     config := config.NewConfigForTesting(numCards, numPlayers, numGames)
 
-    dealer := TestDealer{}
+    deckProvider := SimpleDeckProvider{}
+    dealer := NewTestDealer(deckProvider)
 
     // kitty: 1,2,3
     // beethoven: 4,5,6
@@ -30,6 +31,39 @@ func TestPlayTourneyWinner(t *testing.T) {
     // test
     PlayTourney(config, players, dealer)
     result := players[2].PlayerStats.NumGamesWon
+
+    expected := numGames
+    ok := (result == expected)
+
+    if ! ok {
+        t.Errorf("PlayTourney() error actual: %d expected: %d", result, expected)
+    }
+}
+
+func TestPlayTourneyWinnerCase2(t *testing.T) {
+    p1 := player.NewPlayer("beethoven")
+    p2 := player.NewPlayer("chopin")
+    p3 := player.NewPlayer("mozart")
+
+    players := []player.Player{p1, p2, p3}
+
+    const numCards = 12
+    numPlayers := len(players)
+    const numGames = 10
+    config := config.NewConfigForTesting(numCards, numPlayers, numGames)
+
+    // kitty: 2,3,1
+    // beethoven: 4,11,6
+    // chopin: 7,8,12
+    // mozart: 10,5,9
+
+    deck := []int{2,3,1,4,11,6,7,8,12,10,5,9}
+    deckProvider := TestDeckProvider{deck: deck}
+    dealer := NewTestDealer(deckProvider)
+
+    // test
+    PlayTourney(config, players, dealer)
+    result := players[0].PlayerStats.NumGamesWon
 
     expected := numGames
     ok := (result == expected)

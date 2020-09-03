@@ -15,10 +15,15 @@ type Dealer interface {
 
 // 'proper' vs 'testing'
 type ProperDealer struct {
+    deckProvider DeckProvider
+}
+
+func NewProperDealer(deckProvider DeckProvider) Dealer {
+    return ProperDealer{deckProvider: deckProvider}
 }
 
 func (properDealer ProperDealer) deal(config config.Config, players []player.Player) Table {
-    deck := newDeck(config.NumCards)
+    deck := properDealer.deckProvider.newDeck(config.NumCards)
     deck = shuffle(deck)
     hands := partition(deck, config.NumCardsPerHand)
     var kitty player.Kitty
@@ -33,16 +38,6 @@ func (properDealer ProperDealer) deal(config config.Config, players []player.Pla
     table := NewTable(kitty, players)
 
     return table
-}
-
-func newDeck(numCards int) []int {
-    deck := []int{}
-
-    for i := 1; i <= numCards; i++ {
-        deck = append(deck, i)
-    }
-
-    return deck
 }
 
 func shuffle(cards []int) []int {
