@@ -9,7 +9,15 @@ import (
     "github.com/codetojoy/player"
 )
 
-func Deal(config config.Config, players []player.Player) Table {
+type Dealer interface {
+    deal(config config.Config, players []player.Player) Table
+}
+
+// 'proper' vs 'testing'
+type ProperDealer struct {
+}
+
+func (properDealer ProperDealer) deal(config config.Config, players []player.Player) Table {
     deck := newDeck(config.NumCards)
     deck = shuffle(deck)
     hands := partition(deck, config.NumCardsPerHand)

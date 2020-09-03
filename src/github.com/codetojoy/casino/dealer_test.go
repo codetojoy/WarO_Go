@@ -111,8 +111,10 @@ func TestDeal(t *testing.T) {
 
     players := []player.Player{p1, p2, p3}
 
+    dealer := ProperDealer{}
+
     // test
-    result := Deal(config, players)
+    result := dealer.deal(config, players)
 
     ok := len(result.kitty.GetCards()) == config.NumCardsPerHand
 

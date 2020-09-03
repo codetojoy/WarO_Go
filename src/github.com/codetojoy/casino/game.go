@@ -8,9 +8,9 @@ import (
     "github.com/codetojoy/player"
 )
 
-func playGame(config config.Config, players []player.Player) {
+func playGame(config config.Config, players []player.Player, dealer Dealer) {
 
-    table := Deal(config, players)
+    table := dealer.deal(config, players)
 
     for index := range players {
         player := &players[index]

@@ -8,9 +8,9 @@ import (
     "github.com/codetojoy/player"
 )
 
-func PlayTourney(config config.Config, players []player.Player) {
+func PlayTourney(config config.Config, players []player.Player, dealer Dealer) {
     for i := 0; i < config.NumGames; i++ {
-        playGame(config, players)
+        playGame(config, players, dealer)
     }
 
     winner := determineTourneyWinner(players)

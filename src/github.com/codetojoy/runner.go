@@ -12,9 +12,11 @@ import (
 func main() {
     config := config.NewConfig()
     fmt.Printf("TRACER config: %v\n", config.String())
-    players := player.BuildPlayers(config)
 
-    casino.PlayTourney(config, players)
+    players := player.BuildPlayers(config)
+    dealer := casino.ProperDealer{}
+
+    casino.PlayTourney(config, players, dealer)
 
     fmt.Println("Ready.")
 }
