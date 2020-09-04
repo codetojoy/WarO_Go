@@ -25,17 +25,6 @@ func PlayTourney(config config.Config, players []player.Player, dealer Dealer) {
 }
 
 func determineTourneyWinner(players []player.Player) *player.Player {
-    result := &players[0]
-    bestTotal := result.PlayerStats.NumGamesWon
-
-    for index := range players {
-        player := &players[index]
-        thisTotal := player.PlayerStats.NumGamesWon
-        if thisTotal > bestTotal {
-            bestTotal = thisTotal
-            result = player
-        }
-    }
-
-    return result
+    metric := player.ByNumGamesWon
+    return player.FindHighestByMetric(players, metric)
 }

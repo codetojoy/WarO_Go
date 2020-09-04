@@ -29,17 +29,6 @@ func playGame(config config.Config, players []player.Player, dealer Dealer) {
 }
 
 func determineGameWinner(players []player.Player) *player.Player {
-    result := &players[0]
-    bestTotal := result.PlayerStats.GameTotal
-
-    for index := range players {
-        player := &players[index]
-        thisTotal := player.PlayerStats.GameTotal
-        if thisTotal > bestTotal {
-            bestTotal = thisTotal
-            result = player
-        }
-    }
-
-    return result
+    metric := player.ByGameTotal
+    return player.FindHighestByMetric(players, metric)
 }
