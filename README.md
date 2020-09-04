@@ -27,10 +27,11 @@ TODO:
     - Since this is functional, I have to move on, as I'm more interested in
       the language than the insufferable module/package system.
 * consider new `players` package for functions on a plurality of players
+* write Console strategy
+* clean up various functions
 * revisit public functions
-* revisit passing pointers, esp. for Player 
+* revisit passing pointers, esp. for Player
 * idiomatic `go doc`
 * idiomatic code format (use `go fmt`)
-* use JSON for configuration
-* use interface for strategies 
-
+x * use JSON for configuration
+x * use interface for strategies

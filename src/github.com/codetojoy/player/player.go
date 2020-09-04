@@ -5,7 +5,6 @@ import (
     "fmt"
     "strings"
 
-    "github.com/codetojoy/config"
     "github.com/codetojoy/strategy"
 )
 
@@ -16,22 +15,19 @@ type Player struct {
     PlayerStats PlayerStats
 }
 
+type Metric func(*Player) int
+
+func ByGameTotal(player *Player) int {
+    return player.PlayerStats.GameTotal
+}
+
+func ByNumGamesWon(player *Player) int {
+    return player.PlayerStats.NumGamesWon
+}
+
 func NewPlayer(name string, whichStrategy string) Player {
     return Player{name: name, strategy: strategy.BuildStrategy(whichStrategy),
                     hand: NewHandNoCards(), PlayerStats: PlayerStats{}}
-}
-
-func BuildPlayers(config config.Config) []Player {
-    result := []Player{}
-
-    for _, configPlayer := range config.Players {
-        name := configPlayer.Name
-        whichStrategy := configPlayer.WhichStrategy
-        player := NewPlayer(name, whichStrategy)
-        result = append(result, player)
-    }
-
-    return result
 }
 
 func (player *Player) SetHand(hand Hand) {
@@ -44,12 +40,6 @@ func (player *Player) GetName() string {
 
 func (player *Player) LogCards(prefix string) {
     fmt.Printf("TRACER logCards %v %v cards: %v\n", prefix, player.name, player.hand.GetCards())
-}
-
-func LogCardsForPlayers(players []Player, prefix string) {
-    for _, player := range players {
-        player.LogCards(prefix)
-    }
 }
 
 func (player *Player) GetOffer(prizeCard int, maxCard int) int {
