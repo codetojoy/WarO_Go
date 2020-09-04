@@ -13,6 +13,7 @@ type Player struct {
     hand Hand
     strategy strategy.Strategy
     PlayerStats PlayerStats
+    offer int
 }
 
 type Metric func(*Player) int
@@ -23,6 +24,10 @@ func ByGameTotal(player *Player) int {
 
 func ByNumGamesWon(player *Player) int {
     return player.PlayerStats.NumGamesWon
+}
+
+func ByOffer(player *Player) int {
+    return player.offer
 }
 
 func NewPlayer(name string, whichStrategy string) Player {
@@ -38,14 +43,18 @@ func (player *Player) GetName() string {
     return player.name
 }
 
-func (player *Player) LogCards(prefix string) {
-    fmt.Printf("TRACER logCards %v %v cards: %v\n", prefix, player.name, player.hand.GetCards())
+func (player *Player) GetOffer() int {
+    return player.offer
 }
 
-func (player *Player) GetOffer(prizeCard int, maxCard int) int {
+func (player *Player) MakeOffer(prizeCard int, maxCard int) {
     offer := player.strategy.SelectCard(prizeCard, player.hand.GetCards(), maxCard)
+    player.offer = offer
     player.hand.RemoveCard(offer)
-    return offer
+}
+
+func (player *Player) LogCards(prefix string) {
+    fmt.Printf("TRACER logCards %v %v cards: %v\n", prefix, player.name, player.hand.GetCards())
 }
 
 func (player *Player) WinsRound(prizeCard int) {

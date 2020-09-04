@@ -35,7 +35,7 @@ func TestWinsRound(t *testing.T) {
     }
 }
 
-func TestGetOffer(t *testing.T) {
+func TestMakeOffer(t *testing.T) {
     cases := []struct {
         inCards []int
         prizeCard int
@@ -52,7 +52,8 @@ func TestGetOffer(t *testing.T) {
         player.SetHand(hand)
 
         // test
-        result := player.GetOffer(c.prizeCard, c.maxCard)
+        player.MakeOffer(c.prizeCard, c.maxCard)
+        result := player.GetOffer()
         resultCards := player.GetCardsForTesting()
 
         ok := (result == c.expectedOffer) && (len(c.expectedCards) == len(resultCards))
@@ -66,8 +67,29 @@ func TestGetOffer(t *testing.T) {
         }
 
         if ! ok {
-            t.Errorf("GetOffer offer: %v, expectedOffer: %v, cards: %v expectedCards: %v",
+            t.Errorf("MakeOffer offer: %v, expectedOffer: %v, cards: %v expectedCards: %v",
                         result, c.expectedOffer, resultCards, c.expectedCards)
         }
+    }
+}
+
+func TestSolicitOffers(t *testing.T) {
+    const prizeCard = 10
+    const maxCard = 12
+
+    p1 := BuildPlayerForTesting("beethoven", strategy.NEXT_CARD, []int{3,2,1})
+    p2 := BuildPlayerForTesting("chopin", strategy.NEXT_CARD, []int{4,5,6})
+    p3 := BuildPlayerForTesting("mozart", strategy.NEXT_CARD, []int{9,8,7})
+
+    players := []Player{p1, p2, p3}
+
+    // test
+    SolicitOffers(prizeCard, players, maxCard)
+
+    // TODO: figure out how to use test-assert library (see README.md)
+    ok := (players[0].offer == 3) && (players[1].offer == 4) && (players[2].offer == 9)
+
+    if ! ok {
+        t.Errorf("SolicitOffers() error")
     }
 }

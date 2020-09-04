@@ -24,6 +24,14 @@ func LogCardsForPlayers(players []Player, prefix string) {
     }
 }
 
+func SolicitOffers(prizeCard int, players []Player, maxCard int) {
+    // `index, player = range` will give a 'value' copy, so be careful!
+    for index := range players {
+        thisPlayer := &players[index]
+        thisPlayer.MakeOffer(prizeCard, maxCard)
+    }
+}
+
 func FindHighestByMetric(players []Player, f Metric) *Player {
     result := &players[0]
     bestValue := f(result)

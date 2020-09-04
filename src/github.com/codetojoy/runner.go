@@ -20,9 +20,10 @@ func main() {
         fmt.Printf("TRACER config: %v\n", config.String())
 
         players := player.BuildPlayers(config)
-        player.LogCardsForPlayers(players, "runner")
+
         deckProvider := casino.SimpleDeckProvider{}
         dealer := casino.NewProperDealer(deckProvider)
+        
         casino.PlayTourney(config, players, dealer)
     } else {
         fmt.Println("Usage.")

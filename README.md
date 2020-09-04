@@ -26,13 +26,13 @@ TODO:
     - e.g. to use a 3rd-party package such as: https://github.com/stretchr/testify
     - Since this is functional, I have to move on, as I'm more interested in
       the language than the insufferable module/package system.
-* remove Bid and add Offer to Player 
 * write Console strategy
 * clean up various functions
 * revisit public functions
 * revisit passing pointers, esp. for Player
 * idiomatic `go doc`
 * idiomatic code format (use `go fmt`)
+x * remove Bid and add Offer to Player 
 x * use JSON for configuration
 x * use interface for strategies
 x * consider new `players` package for functions on a plurality of players
