@@ -44,9 +44,16 @@ func (hand *Hand) GetCards() []int {
 func (hand *Hand) String() string {
     result := strings.Builder{}
 
+    numCards := len(hand.cards)
+
     result.WriteString("[")
-    for _, card := range hand.cards {
-        result.WriteString(fmt.Sprintf("%d ", card))
+    for i, card := range hand.cards {
+        result.WriteString(fmt.Sprintf("%d", card))
+
+        isLastCard := (i == (numCards - 1))
+        if ! isLastCard {
+            result.WriteString(" ")
+        }
     }
     result.WriteString("]")
 
