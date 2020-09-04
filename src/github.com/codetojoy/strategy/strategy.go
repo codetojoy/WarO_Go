@@ -2,6 +2,10 @@
 package strategy
 
 import (
+    "bufio"
+    "fmt"
+    "os"
+    "strconv"
     "strings"
 )
 
@@ -9,16 +13,19 @@ type Strategy interface {
     SelectCard(prizeCard int, cards []int, max int) int
 }
 
-const HYBRID = "Hybrid"
-const NEAREST_CARD = "Nearest_Card"
-const NEXT_CARD = "Next_Card"
-const MAX_CARD = "Max_Card"
-const MIN_CARD = "Min_Card"
+const CONSOLE = "console"
+const HYBRID = "hybrid"
+const NEAREST_CARD = "nearest_card"
+const NEXT_CARD = "next_card"
+const MAX_CARD = "max_card"
+const MIN_CARD = "min_card"
 
 func BuildStrategy(which string) Strategy {
     var result Strategy
 
-    if strings.EqualFold(HYBRID, which) {
+    if strings.EqualFold(CONSOLE, which) {
+        result = consoleCard{}
+    } else if strings.EqualFold(HYBRID, which) {
         result = hybridCard{}
     } else if strings.EqualFold(NEXT_CARD, which) {
         result = nextCard{}
@@ -36,7 +43,7 @@ func BuildStrategy(which string) Strategy {
 type nextCard struct {
 }
 
-func (nc nextCard) SelectCard(prizeCard int, cards []int, max int) int {
+func (nc nextCard) SelectCard(prizeCard int, cards []int, _ int) int {
     return cards[0]
 }
 
@@ -72,7 +79,7 @@ func (nc nearestCard) SelectCard(prizeCard int, cards []int, max int) int {
 type maxCard struct {
 }
 
-func (mc maxCard) SelectCard(prizeCard int, cards []int, maxCard int) int {
+func (mc maxCard) SelectCard(prizeCard int, cards []int, _ int) int {
     result := 0
 
     for _, card := range cards {
@@ -87,8 +94,8 @@ func (mc maxCard) SelectCard(prizeCard int, cards []int, maxCard int) int {
 type minCard struct {
 }
 
-func (mc minCard) SelectCard(prizeCard int, cards []int, maxCard int) int {
-    result := maxCard * 10
+func (mc minCard) SelectCard(prizeCard int, cards []int, max int) int {
+    result := max * 10
 
     for _, card := range cards {
         if card < result {
@@ -115,4 +122,45 @@ func (hc hybridCard) SelectCard(prizeCard int, cards []int, max int) int {
     result := s.SelectCard(prizeCard, cards, max)
 
     return result
+}
+
+type consoleCard struct {
+}
+
+func (cc consoleCard) SelectCard(prizeCard int, cards []int, _ int) int {
+    ok := false
+
+    var card int
+    var err error
+
+    for ! ok {
+        card, err = cc.getInput(prizeCard, cards)
+
+        ok = (err == nil)
+
+        if ! ok {
+            fmt.Printf("illegal pick!\n")
+        }
+    }
+
+    return card
+}
+
+func (cc consoleCard) getInput(prizeCard int, cards []int) (int, error) {
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Printf("------------\n")
+    fmt.Printf("prize card: %d\nyour hand: %v\n\n", prizeCard, cards)
+    fmt.Print("your choice: ")
+
+    var card int
+    var err error
+    s, e1 := reader.ReadString('\n')
+
+    if e1 == nil {
+        card, err = strconv.Atoi(strings.TrimSpace(s))
+    } else {
+        err = e1
+    }
+
+    return card, err
 }
