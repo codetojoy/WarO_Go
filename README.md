@@ -29,12 +29,4 @@ TODO:
 * unit tests for other strategies
 * check code coverage, esp. near console strategy 
 * revisit passing pointers, esp. for Player
-y * idiomatic `go doc`
-x * idiomatic code format (use `go fmt`)
-x * clean up various functions, dead code
-x * revisit public functions
-x * write Console strategy
-x * remove Bid and add Offer to Player 
-x * use JSON for configuration
-x * use interface for strategies
-x * consider new `players` package for functions on a plurality of players
+* more `go doc`
