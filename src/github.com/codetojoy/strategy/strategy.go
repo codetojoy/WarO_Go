@@ -136,7 +136,7 @@ func (cc consoleCard) SelectCard(prizeCard int, cards []int, _ int) int {
     for ! ok {
         card, err = cc.getInput(prizeCard, cards)
 
-        ok = (err == nil)
+        ok = (err == nil) && cc.isLegalPick(cards, card)
 
         if ! ok {
             fmt.Printf("illegal pick!\n")
@@ -144,6 +144,18 @@ func (cc consoleCard) SelectCard(prizeCard int, cards []int, _ int) int {
     }
 
     return card
+}
+
+func (cc consoleCard) isLegalPick(cards []int, pick int) bool {
+    result := false
+
+    for _, card := range cards {
+        if (! result) && (card == pick) {
+            result = true
+        }
+    }
+
+    return result
 }
 
 func (cc consoleCard) getInput(prizeCard int, cards []int) (int, error) {
