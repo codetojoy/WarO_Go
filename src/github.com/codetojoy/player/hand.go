@@ -24,6 +24,12 @@ func (hand *Hand) DealCard(card int) {
     hand.cards = append(hand.cards, card)
 }
 
+func (hand *Hand) TakeCard() int {
+    card, cards := hand.cards[0], hand.cards[1:]
+    hand.cards = cards
+    return card
+}
+
 // TODO: this is pretty crazy and not idiomatic
 func (hand *Hand) RemoveCard(card int) {
     cards := []int{}

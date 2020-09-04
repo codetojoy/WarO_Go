@@ -14,9 +14,7 @@ func playRound(config config.Config, table *Table) {
 
 // "simple" in the sense of params with simpler levels of nesting
 func playRoundSimple(kitty *player.Hand, players []player.Player, maxCard int) {
-    // TODO: pop
-    prizeCard := kitty.GetCards()[0]
-    kitty.RemoveCard(prizeCard)
+    prizeCard := kitty.TakeCard()
     player.SolicitOffers(prizeCard, players, maxCard)
 
     for index := range players {
