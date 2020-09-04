@@ -1,90 +1,89 @@
-
 package player
 
 import (
-    "fmt"
-    "strings"
+	"fmt"
+	"strings"
 
-    "github.com/codetojoy/strategy"
+	"github.com/codetojoy/strategy"
 )
 
 type Player struct {
-    name string
-    hand Hand
-    strategy strategy.Strategy
-    PlayerStats PlayerStats
-    offer int
+	name        string
+	hand        Hand
+	strategy    strategy.Strategy
+	PlayerStats PlayerStats
+	offer       int
 }
 
 type Metric func(*Player) int
 
 func ByGameTotal(player *Player) int {
-    return player.PlayerStats.GameTotal
+	return player.PlayerStats.GameTotal
 }
 
 func ByNumGamesWon(player *Player) int {
-    return player.PlayerStats.NumGamesWon
+	return player.PlayerStats.NumGamesWon
 }
 
 func ByOffer(player *Player) int {
-    return player.offer
+	return player.offer
 }
 
 func NewPlayer(name string, whichStrategy string) Player {
-    return Player{name: name, strategy: strategy.BuildStrategy(whichStrategy),
-                    hand: NewHandNoCards(), PlayerStats: PlayerStats{}}
+	return Player{name: name, strategy: strategy.BuildStrategy(whichStrategy),
+		hand: NewHandNoCards(), PlayerStats: PlayerStats{}}
 }
 
 func (player *Player) SetHand(hand Hand) {
-    player.hand = hand
+	player.hand = hand
 }
 
 func (player *Player) GetName() string {
-    return player.name
+	return player.name
 }
 
 func (player *Player) GetOffer() int {
-    return player.offer
+	return player.offer
 }
 
 func (player *Player) MakeOffer(prizeCard int, maxCard int) {
-    offer := player.strategy.SelectCard(prizeCard, player.hand.GetCards(), maxCard)
-    player.offer = offer
-    player.hand.RemoveCard(offer)
+	offer := player.strategy.SelectCard(prizeCard, player.hand.GetCards(), maxCard)
+	player.offer = offer
+	player.hand.RemoveCard(offer)
 }
 
 func (player *Player) WinsRound(prizeCard int) {
-    player.PlayerStats.GameTotal += prizeCard
-    player.PlayerStats.NumRoundsWon += 1
+	player.PlayerStats.GameTotal += prizeCard
+	player.PlayerStats.NumRoundsWon += 1
 }
 
 func (player *Player) WinsGame() {
-    player.PlayerStats.NumGamesWon += 1
+	player.PlayerStats.NumGamesWon += 1
 }
 
 func (player *Player) ClearGameStats() {
-    player.PlayerStats.GameTotal = 0
-    player.PlayerStats.NumRoundsWon = 0
+	player.PlayerStats.GameTotal = 0
+	player.PlayerStats.NumRoundsWon = 0
 }
 
 func (player *Player) String() string {
-    result := strings.Builder{}
+	result := strings.Builder{}
 
-    result.WriteString(fmt.Sprintf("%s : ", player.name))
-    result.WriteString(fmt.Sprintf("%s ", player.PlayerStats.String()))
-    result.WriteString(fmt.Sprintf("%s ", player.hand.String()))
+	result.WriteString(fmt.Sprintf("%s : ", player.name))
+	result.WriteString(fmt.Sprintf("%s ", player.PlayerStats.String()))
+	result.WriteString(fmt.Sprintf("%s ", player.hand.String()))
 
-    return result.String()
+	return result.String()
 }
 
 // -------- for test
 
 func BuildPlayerForTesting(name string, whichStrategy string, cards []int) Player {
-    player := NewPlayer(name, whichStrategy)
-    player.SetHand(NewHand(cards))
-    return player
+	player := NewPlayer(name, whichStrategy)
+	player.SetHand(NewHand(cards))
+	return player
 }
 
 func (player *Player) GetCardsForTesting() []int {
-    return player.hand.GetCards()
+	return player.hand.GetCards()
 }

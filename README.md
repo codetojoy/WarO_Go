@@ -30,7 +30,7 @@ TODO:
 * check code coverage, esp. near console strategy 
 * revisit passing pointers, esp. for Player
 y * idiomatic `go doc`
-* idiomatic code format (use `go fmt`)
+x * idiomatic code format (use `go fmt`)
 x * clean up various functions, dead code
 x * revisit public functions
 x * write Console strategy

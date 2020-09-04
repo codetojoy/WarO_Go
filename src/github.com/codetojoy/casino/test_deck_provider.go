@@ -1,10 +1,9 @@
-
 package casino
 
 type TestDeckProvider struct {
-    deck []int
+	deck []int
 }
 
 func (deckProvider TestDeckProvider) newDeck(numCards int) []int {
-    return deckProvider.deck
+	return deckProvider.deck
 }

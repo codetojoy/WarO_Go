@@ -1,33 +1,32 @@
-
 package main
 
 import (
-    "fmt"
-    "os"
+	"fmt"
+	"os"
 
-    "github.com/codetojoy/casino"
-    "github.com/codetojoy/config"
-    "github.com/codetojoy/player"
+	"github.com/codetojoy/casino"
+	"github.com/codetojoy/config"
+	"github.com/codetojoy/player"
 )
 
 func main() {
-    numArgs := len(os.Args)
+	numArgs := len(os.Args)
 
-    if numArgs > 1 {
-        configFile := os.Args[1]
+	if numArgs > 1 {
+		configFile := os.Args[1]
 
-        config := config.NewConfigFromFile(configFile)
-        fmt.Printf("TRACER config: %v\n", config.String())
+		config := config.NewConfigFromFile(configFile)
+		fmt.Printf("TRACER config: %v\n", config.String())
 
-        players := player.BuildPlayers(config)
+		players := player.BuildPlayers(config)
 
-        deckProvider := casino.SimpleDeckProvider{}
-        dealer := casino.NewProperDealer(deckProvider)
-        
-        casino.PlayTourney(config, players, dealer)
-    } else {
-        fmt.Println("Usage.")
-    }
+		deckProvider := casino.SimpleDeckProvider{}
+		dealer := casino.NewProperDealer(deckProvider)
 
-    fmt.Println("Ready.")
+		casino.PlayTourney(config, players, dealer)
+	} else {
+		fmt.Println("Usage.")
+	}
+
+	fmt.Println("Ready.")
 }
