@@ -24,7 +24,6 @@ type Config struct {
 
 func NewConfigFromFile(jsonFile string) Config {
     jsonConfig := json.BuildJsonConfig(jsonFile)
-    // jsonConfig.Log()
     numCards := jsonConfig.NumCards
     numGames := jsonConfig.NumGames
     numPlayers := len(jsonConfig.Players)
@@ -38,19 +37,6 @@ func NewConfigFromFile(jsonFile string) Config {
     }
 
     return config
-}
-
-func NewConfig() Config {
-    const numCards = 12
-    const numPlayers = 3
-    const numGames = 10
-    // numPlayers + 1 because of kitty
-    const numCardsPerHand = numCards / (numPlayers + 1)
-    const maxCard = numCards
-
-    return Config{NumCards: numCards, NumGames: numGames,
-                    NumPlayers: numPlayers, NumCardsPerHand: numCardsPerHand,
-                    MaxCard: maxCard, Players: []PlayerConfig{}}
 }
 
 func NewConfigForTesting(numCards int, numPlayers int, numGames int) Config {

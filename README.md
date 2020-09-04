@@ -27,6 +27,7 @@ TODO:
     - Since this is functional, I have to move on, as I'm more interested in
       the language than the insufferable module/package system.
 * clean up various functions, dead code
+* check code coverage, esp. near console strategy 
 * revisit public functions
 * revisit passing pointers, esp. for Player
 * idiomatic `go doc`

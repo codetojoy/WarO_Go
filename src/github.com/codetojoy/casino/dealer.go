@@ -35,7 +35,7 @@ func (properDealer ProperDealer) deal(config config.Config, players []player.Pla
             kitty = hand
         }
     }
-    table := NewTable(kitty, players)
+    table := newTable(kitty, players)
 
     return table
 }

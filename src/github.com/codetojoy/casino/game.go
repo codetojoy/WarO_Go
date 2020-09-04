@@ -14,7 +14,7 @@ func playGame(config config.Config, players []player.Player, dealer Dealer) {
 
     for index := range players {
         player := &players[index]
-        player.NewGame()
+        player.ClearGameStats()
     }
 
     for i := 0; i < config.NumCardsPerHand; i++ {

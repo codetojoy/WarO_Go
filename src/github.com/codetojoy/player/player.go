@@ -53,10 +53,6 @@ func (player *Player) MakeOffer(prizeCard int, maxCard int) {
     player.hand.RemoveCard(offer)
 }
 
-func (player *Player) LogCards(prefix string) {
-    fmt.Printf("TRACER logCards %v %v cards: %v\n", prefix, player.name, player.hand.GetCards())
-}
-
 func (player *Player) WinsRound(prizeCard int) {
     player.PlayerStats.GameTotal += prizeCard
     player.PlayerStats.NumRoundsWon += 1
@@ -66,7 +62,7 @@ func (player *Player) WinsGame() {
     player.PlayerStats.NumGamesWon += 1
 }
 
-func (player *Player) NewGame() {
+func (player *Player) ClearGameStats() {
     player.PlayerStats.GameTotal = 0
     player.PlayerStats.NumRoundsWon = 0
 }

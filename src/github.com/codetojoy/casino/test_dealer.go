@@ -29,7 +29,7 @@ func (testDealer TestDealer) deal(config config.Config, players []player.Player)
             kitty = hand
         }
     }
-    table := NewTable(kitty, players)
+    table := newTable(kitty, players)
 
     return table
 }

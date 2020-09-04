@@ -19,7 +19,7 @@ func PlayTourney(config config.Config, players []player.Player, dealer Dealer) {
     fmt.Printf("TRACER %v WINS tourney!\n", winner.GetName())
     for index := range players {
         player := &players[index]
-        player.NewGame() // clear last game stats
+        player.ClearGameStats() 
         fmt.Printf("%v\n", player.String())
     }
 }

@@ -13,7 +13,7 @@ type Table struct {
     players []player.Player
 }
 
-func NewTable(kitty player.Kitty, players []player.Player) Table {
+func newTable(kitty player.Kitty, players []player.Player) Table {
     return Table{kitty: kitty, players: players}
 }
 
