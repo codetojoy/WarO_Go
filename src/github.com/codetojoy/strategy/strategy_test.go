@@ -112,3 +112,27 @@ func TestHybrid_Min(t *testing.T) {
         t.Errorf("Hybrid actual: %d expected: %d", result, expected)
     }
 }
+
+func TestIsLegalPick(t *testing.T) {
+    cases := []struct {
+        inCards []int
+        pick int
+        expected bool
+    }{
+        {[]int{1,2,3}, 2, true},
+        {[]int{1,2,3}, 44, false},
+    }
+
+    consoleCard := consoleCard{}
+
+    for _, c := range cases {
+        // test
+        result := consoleCard.isLegalPick(c.inCards, c.pick)
+
+        ok := (result == c.expected)
+
+        if ! ok {
+            t.Errorf("isLegalPick() == %v, expected %v", result, c.expected)
+        }
+    }
+}
