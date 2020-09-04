@@ -1,4 +1,4 @@
-
+// Package json parses configuration from a JSON file.
 package json
 
 import (
@@ -21,6 +21,7 @@ type JsonConfig struct {
     Players []JsonPlayer `json:"players"`
 }
 
+// Log prints out a JsonConfig for trouble-shooting.
 func (jsonConfig *JsonConfig) Log() {
     fmt.Printf("numCards: %d\n", jsonConfig.NumCards)
     fmt.Printf("numGames: %d\n", jsonConfig.NumGames)
@@ -32,6 +33,7 @@ func (jsonConfig *JsonConfig) Log() {
     }
 }
 
+// BuildJsonConfig parses a JSON file and builds JsonConfig
 func BuildJsonConfig(jsonFileName string) *JsonConfig {
     // from https://tutorialedge.net/golang/parsing-json-with-golang/
     jsonFile, err := os.Open(jsonFileName)

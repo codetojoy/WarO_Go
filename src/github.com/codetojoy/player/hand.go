@@ -1,4 +1,4 @@
-
+// Package player handles player state/functionality.
 package player
 
 import (

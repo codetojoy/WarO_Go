@@ -1,8 +1,7 @@
-
 package casino
 
 type DeckProvider interface {
-    newDeck(numCards int) []int 
+    newDeck(numCards int) []int
 }
 
 type SimpleDeckProvider struct {

@@ -1,4 +1,4 @@
-
+// Package strategy contains various strategies (see Strategy in Design Patterns). 
 package strategy
 
 import (

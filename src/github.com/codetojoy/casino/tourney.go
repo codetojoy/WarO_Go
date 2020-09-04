@@ -1,4 +1,3 @@
-
 package casino
 
 import (
@@ -19,7 +18,7 @@ func PlayTourney(config config.Config, players []player.Player, dealer Dealer) {
     fmt.Printf("TRACER %v WINS tourney!\n", winner.GetName())
     for index := range players {
         player := &players[index]
-        player.ClearGameStats() 
+        player.ClearGameStats()
         fmt.Printf("%v\n", player.String())
     }
 }

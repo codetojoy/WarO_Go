@@ -1,4 +1,4 @@
-
+// Package casino handles the mechanics of running the game.
 package casino
 
 import (

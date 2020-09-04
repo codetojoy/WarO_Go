@@ -1,4 +1,4 @@
-
+// Package config handles configuration of the game and players.
 package config
 
 import (
@@ -22,6 +22,7 @@ type Config struct {
     Players []PlayerConfig
 }
 
+// NewConfigFromFile builds a Config from a JSON file.
 func NewConfigFromFile(jsonFile string) Config {
     jsonConfig := json.BuildJsonConfig(jsonFile)
     numCards := jsonConfig.NumCards
@@ -39,6 +40,7 @@ func NewConfigFromFile(jsonFile string) Config {
     return config
 }
 
+// NewConfigForTesting builds a Config in a unit-test context.
 func NewConfigForTesting(numCards int, numPlayers int, numGames int) Config {
     // numPlayers + 1 because of kitty
     numCardsPerHand := numCards / (numPlayers + 1)
@@ -49,6 +51,7 @@ func NewConfigForTesting(numCards int, numPlayers int, numGames int) Config {
                     MaxCard: maxCard, Players: []PlayerConfig{}}
 }
 
+// String is standard functionality.
 func (config *Config) String() string {
     result := strings.Builder{}
 
