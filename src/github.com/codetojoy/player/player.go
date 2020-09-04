@@ -16,16 +16,18 @@ type Player struct {
     PlayerStats PlayerStats
 }
 
-func NewPlayer(name string) Player {
-    return Player{name: name, strategy: strategy.BuildStrategy("NextCard")}
+func NewPlayer(name string, whichStrategy string) Player {
+    return Player{name: name, strategy: strategy.BuildStrategy(whichStrategy),
+                    hand: NewHandNoCards(), PlayerStats: PlayerStats{}}
 }
 
 func BuildPlayers(config config.Config) []Player {
     result := []Player{}
 
-    for i := 1; i <= config.NumPlayers; i++ {
-        name := fmt.Sprintf("player%d", i)
-        player := NewPlayer(name)
+    for _, configPlayer := range config.Players {
+        name := configPlayer.Name
+        whichStrategy := configPlayer.WhichStrategy
+        player := NewPlayer(name, whichStrategy)
         result = append(result, player)
     }
 
@@ -82,8 +84,8 @@ func (player *Player) String() string {
 
 // -------- for test
 
-func BuildPlayerForTesting(name string, cards []int) Player {
-    player := NewPlayer(name)
+func BuildPlayerForTesting(name string, whichStrategy string, cards []int) Player {
+    player := NewPlayer(name, whichStrategy)
     player.SetHand(NewHand(cards))
     return player
 }

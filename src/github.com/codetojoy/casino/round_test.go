@@ -5,15 +5,16 @@ import (
     "testing"
 
     "github.com/codetojoy/player"
+    "github.com/codetojoy/strategy"
 )
 
 func TestGetBids(t *testing.T) {
     const prizeCard = 10
     const maxCard = 12
 
-    p1 := player.BuildPlayerForTesting("beethoven", []int{3,2,1})
-    p2 := player.BuildPlayerForTesting("chopin", []int{4,5,6})
-    p3 := player.BuildPlayerForTesting("mozart", []int{9,8,7})
+    p1 := player.BuildPlayerForTesting("beethoven", strategy.NEXT_CARD, []int{3,2,1})
+    p2 := player.BuildPlayerForTesting("chopin", strategy.NEXT_CARD, []int{4,5,6})
+    p3 := player.BuildPlayerForTesting("mozart", strategy.NEXT_CARD, []int{9,8,7})
 
     players := []player.Player{p1, p2, p3}
 
@@ -35,9 +36,9 @@ func TestPlayRoundSimple(t *testing.T) {
     const maxCard = 12
 
     kitty := player.NewHand([]int{10,11,12})
-    p1 := player.BuildPlayerForTesting("beethoven", []int{3,2,1})
-    p2 := player.BuildPlayerForTesting("chopin", []int{4,5,6})
-    p3 := player.BuildPlayerForTesting("mozart", []int{9,8,7})
+    p1 := player.BuildPlayerForTesting("beethoven", strategy.NEXT_CARD, []int{3,2,1})
+    p2 := player.BuildPlayerForTesting("chopin", strategy.NEXT_CARD, []int{4,5,6})
+    p3 := player.BuildPlayerForTesting("mozart", strategy.NEXT_CARD, []int{9,8,7})
 
     // TODO: this makes a copy of Player
     players := []player.Player{p1, p2, p3}
@@ -58,9 +59,9 @@ func TestPlayRoundSimple(t *testing.T) {
 
 func TestDetermineRoundWinner(t *testing.T) {
     const prizeCard = 10
-    p1 := player.BuildPlayerForTesting("beethoven", []int{/* 3, */2,1})
-    p2 := player.BuildPlayerForTesting("chopin", []int{/* 4, */5,6})
-    p3 := player.BuildPlayerForTesting("mozart", []int{/* 9, */8,7})
+    p1 := player.BuildPlayerForTesting("beethoven", strategy.NEXT_CARD, []int{/* 3, */2,1})
+    p2 := player.BuildPlayerForTesting("chopin", strategy.NEXT_CARD, []int{/* 4, */5,6})
+    p3 := player.BuildPlayerForTesting("mozart", strategy.NEXT_CARD, []int{/* 9, */8,7})
 
     bid1 := player.Bid{Offer: 3, PrizeCard: prizeCard, Player: &p1}
     bid2 := player.Bid{Offer: 4, PrizeCard: prizeCard, Player: &p2}

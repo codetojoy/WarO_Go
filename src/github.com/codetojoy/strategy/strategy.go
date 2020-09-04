@@ -9,14 +9,14 @@ type Strategy interface {
     SelectCard(prizeCard int, cards []int, max int) int
 }
 
+const HYBRID = "Hybrid"
+const NEAREST_CARD = "Nearest_Card"
+const NEXT_CARD = "Next_Card"
+const MAX_CARD = "Max_Card"
+const MIN_CARD = "Min_Card"
+
 func BuildStrategy(which string) Strategy {
     var result Strategy
-
-    const HYBRID = "Hybrid"
-    const NEAREST_CARD = "NearestCard"
-    const NEXT_CARD = "NextCard"
-    const MAX_CARD = "MaxCard"
-    const MIN_CARD = "MinCard"
 
     if strings.EqualFold(HYBRID, which) {
         result = hybridCard{}

@@ -2,4 +2,4 @@
 
 export GOPATH=$PWD
 
-go run src/github.com/codetojoy/runner.go $1
+go run src/github.com/codetojoy/runner.go config.json 
