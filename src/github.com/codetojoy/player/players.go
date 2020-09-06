@@ -23,6 +23,12 @@ func SolicitOffers(prizeCard int, players []Player, maxCard int) {
 		thisPlayer := &players[index]
 		thisPlayer.MakeOffer(prizeCard, maxCard)
 	}
+
+	// TODO: this should probably be a select on channels ?
+	for index := range players {
+		thisPlayer := &players[index]
+		thisPlayer.GetOffer()
+	}
 }
 
 func FindHighestByMetric(players []Player, f Metric) *Player {

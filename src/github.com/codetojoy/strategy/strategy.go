@@ -10,7 +10,7 @@ import (
 )
 
 type Strategy interface {
-	SelectCard(prizeCard int, cards []int, max int) int
+	SelectCard(ch chan int, prizeCard int, cards []int, max int)
 }
 
 const CONSOLE = "console"
@@ -43,8 +43,8 @@ func BuildStrategy(which string) Strategy {
 type nextCard struct {
 }
 
-func (nc nextCard) SelectCard(prizeCard int, cards []int, _ int) int {
-	return cards[0]
+func (nc nextCard) SelectCard(ch chan int, prizeCard int, cards []int, _ int) {
+	ch <- cards[0]
 }
 
 type nearestCard struct {
@@ -60,7 +60,7 @@ func absValue(x int) int {
 	return result
 }
 
-func (nc nearestCard) SelectCard(prizeCard int, cards []int, max int) int {
+func (nc nearestCard) SelectCard(ch chan int, prizeCard int, cards []int, max int) {
 	result := 0
 	bestAbsValue := max * 10
 
@@ -73,13 +73,13 @@ func (nc nearestCard) SelectCard(prizeCard int, cards []int, max int) int {
 		}
 	}
 
-	return result
+	ch <- result
 }
 
 type maxCard struct {
 }
 
-func (mc maxCard) SelectCard(prizeCard int, cards []int, _ int) int {
+func (mc maxCard) SelectCard(ch chan int, prizeCard int, cards []int, _ int) {
 	result := 0
 
 	for _, card := range cards {
@@ -88,13 +88,13 @@ func (mc maxCard) SelectCard(prizeCard int, cards []int, _ int) int {
 		}
 	}
 
-	return result
+	ch <- result
 }
 
 type minCard struct {
 }
 
-func (mc minCard) SelectCard(prizeCard int, cards []int, max int) int {
+func (mc minCard) SelectCard(ch chan int, prizeCard int, cards []int, max int) {
 	result := max * 10
 
 	for _, card := range cards {
@@ -103,14 +103,13 @@ func (mc minCard) SelectCard(prizeCard int, cards []int, max int) int {
 		}
 	}
 
-	return result
+	ch <- result
 }
 
 type hybridCard struct {
 }
 
-func (hc hybridCard) SelectCard(prizeCard int, cards []int, max int) int {
-
+func (hc hybridCard) SelectCard(ch chan int, prizeCard int, cards []int, max int) {
 	var s Strategy
 
 	if prizeCard > (max / 2) {
@@ -119,15 +118,13 @@ func (hc hybridCard) SelectCard(prizeCard int, cards []int, max int) int {
 		s = minCard{}
 	}
 
-	result := s.SelectCard(prizeCard, cards, max)
-
-	return result
+	s.SelectCard(ch, prizeCard, cards, max)
 }
 
 type consoleCard struct {
 }
 
-func (cc consoleCard) SelectCard(prizeCard int, cards []int, _ int) int {
+func (cc consoleCard) SelectCard(ch chan int, prizeCard int, cards []int, _ int) {
 	ok := false
 
 	var card int
@@ -143,7 +140,7 @@ func (cc consoleCard) SelectCard(prizeCard int, cards []int, _ int) int {
 		}
 	}
 
-	return card
+	ch <- card
 }
 
 func (cc consoleCard) isLegalPick(cards []int, pick int) bool {

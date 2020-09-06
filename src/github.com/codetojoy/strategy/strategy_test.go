@@ -4,6 +4,13 @@ import (
 	"testing"
 )
 
+func executeStrategySync(s Strategy, prizeCard int, cards []int, maxCard int) int {
+	ch := make(chan int)
+	go s.SelectCard(ch, prizeCard, cards, maxCard)
+	result := <-ch
+	return result
+}
+
 func TestNextCard(t *testing.T) {
 	const prizeCard = 10
 	cards := []int{4, 6, 8}
@@ -11,7 +18,7 @@ func TestNextCard(t *testing.T) {
 	strategy := BuildStrategy(NEXT_CARD)
 
 	// test
-	result := strategy.SelectCard(prizeCard, cards, maxCard)
+	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
 
 	// TODO: figure out how to use test-assert library (see README.md)
 	expected := 4
@@ -29,7 +36,7 @@ func TestNearestCard(t *testing.T) {
 	strategy := BuildStrategy(NEAREST_CARD)
 
 	// test
-	result := strategy.SelectCard(prizeCard, cards, maxCard)
+	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
 
 	// TODO: figure out how to use test-assert library (see README.md)
 	expected := 9
@@ -47,7 +54,7 @@ func TestMaxCard(t *testing.T) {
 	strategy := BuildStrategy(MAX_CARD)
 
 	// test
-	result := strategy.SelectCard(prizeCard, cards, maxCard)
+	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
 
 	// TODO: figure out how to use test-assert library (see README.md)
 	expected := 11
@@ -65,7 +72,7 @@ func TestMinCard(t *testing.T) {
 	strategy := BuildStrategy(MIN_CARD)
 
 	// test
-	result := strategy.SelectCard(prizeCard, cards, maxCard)
+	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
 
 	// TODO: figure out how to use test-assert library (see README.md)
 	expected := 4
@@ -83,7 +90,7 @@ func TestHybrid_Max(t *testing.T) {
 	strategy := BuildStrategy(HYBRID)
 
 	// test
-	result := strategy.SelectCard(prizeCard, cards, maxCard)
+	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
 
 	// TODO: figure out how to use test-assert library (see README.md)
 	expected := 12
@@ -101,7 +108,7 @@ func TestHybrid_Min(t *testing.T) {
 	strategy := BuildStrategy(HYBRID)
 
 	// test
-	result := strategy.SelectCard(prizeCard, cards, maxCard)
+	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
 
 	// TODO: figure out how to use test-assert library (see README.md)
 	expected := 4

@@ -8,11 +8,13 @@ import (
 )
 
 type Player struct {
-	name        string
-	hand        Hand
-	strategy    strategy.Strategy
-	PlayerStats PlayerStats
-	offer       int
+	name         string
+	hand         Hand
+	strategy     strategy.Strategy
+	PlayerStats  PlayerStats
+	offer        int
+	channel      chan int
+	isOfferReady bool
 }
 
 type Metric func(*Player) int
@@ -30,8 +32,9 @@ func ByOffer(player *Player) int {
 }
 
 func NewPlayer(name string, whichStrategy string) Player {
+	ch := make(chan int)
 	return Player{name: name, strategy: strategy.BuildStrategy(whichStrategy),
-		hand: NewHandNoCards(), PlayerStats: PlayerStats{}}
+		hand: NewHandNoCards(), PlayerStats: PlayerStats{}, channel: ch}
 }
 
 func (player *Player) SetHand(hand Hand) {
@@ -42,14 +45,38 @@ func (player *Player) GetName() string {
 	return player.name
 }
 
+// this will block on channel
 func (player *Player) GetOffer() int {
-	return player.offer
+	result := 0
+
+	if player.getIsOfferReady() {
+		result = player.offer
+		// in event of being called repeatedly, this is safe. i.e. it can handle if target is not present
+		player.hand.RemoveCard(player.offer)
+	}
+
+	return result
+}
+
+// this will block on channel
+func (player *Player) getIsOfferReady() bool {
+	// result is always true, since we are blocking until it is true
+	result := true
+
+	if !player.isOfferReady {
+		player.offer = <-player.channel
+		player.isOfferReady = true
+	}
+
+	return result
 }
 
 func (player *Player) MakeOffer(prizeCard int, maxCard int) {
-	offer := player.strategy.SelectCard(prizeCard, player.hand.GetCards(), maxCard)
-	player.offer = offer
-	player.hand.RemoveCard(offer)
+	player.isOfferReady = false
+	go player.strategy.SelectCard(player.channel, prizeCard, player.hand.GetCards(), maxCard)
+	// offer := player.strategy.SelectCard(prizeCard, player.hand.GetCards(), maxCard)
+	// player.offer = offer
+	// player.hand.RemoveCard(offer)
 }
 
 func (player *Player) WinsRound(prizeCard int) {
