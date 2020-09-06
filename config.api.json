@@ -1,0 +1,9 @@
+{
+"num_cards": 12,
+"num_games": 1,
+"is_verbose": true,
+"players": [
+    {"name": "you", "strategy": "console"},
+    {"name": "bach", "strategy": "api_remote"}
+]
+}

@@ -13,6 +13,7 @@ type Strategy interface {
 	SelectCard(ch chan int, prizeCard int, cards []int, max int)
 }
 
+const API_REMOTE = "api_remote"
 const CONSOLE = "console"
 const HYBRID = "hybrid"
 const NEAREST_CARD = "nearest_card"
@@ -23,7 +24,9 @@ const MIN_CARD = "min_card"
 func BuildStrategy(which string) Strategy {
 	var result Strategy
 
-	if strings.EqualFold(CONSOLE, which) {
+	if strings.EqualFold(API_REMOTE, which) {
+		result = apiRemoteCard{}
+	} else if strings.EqualFold(CONSOLE, which) {
 		result = consoleCard{}
 	} else if strings.EqualFold(HYBRID, which) {
 		result = hybridCard{}
