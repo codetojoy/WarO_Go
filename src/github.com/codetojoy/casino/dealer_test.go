@@ -77,9 +77,9 @@ func TestDeal(t *testing.T) {
 	const numGames = 1
 	config := config.NewConfigForTesting(numCards, numPlayers, numGames)
 
-	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD)
-	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD)
-	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD)
+	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD, "")
+	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD, "")
+	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD, "")
 
 	players := []player.Player{p1, p2, p3}
 

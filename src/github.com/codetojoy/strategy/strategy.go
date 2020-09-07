@@ -21,11 +21,11 @@ const NEXT_CARD = "next_card"
 const MAX_CARD = "max_card"
 const MIN_CARD = "min_card"
 
-func BuildStrategy(which string) Strategy {
+func BuildStrategy(which string, url string) Strategy {
 	var result Strategy
 
 	if strings.EqualFold(API_REMOTE, which) {
-		result = apiRemoteCard{}
+		result = apiRemoteCard{url: url}
 	} else if strings.EqualFold(CONSOLE, which) {
 		result = consoleCard{}
 	} else if strings.EqualFold(HYBRID, which) {

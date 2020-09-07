@@ -4,6 +4,10 @@
 "is_verbose": true,
 "players": [
     {"name": "you", "strategy_name": "console"},
-    {"name": "bach", "strategy_name": "api_remote"}
+    {
+        "name": "bach",
+        "strategy_name": "api_remote",
+        "strategy_url": "http://localhost:6160/waro/strategy?mode=min"
+    }
 ]
 }

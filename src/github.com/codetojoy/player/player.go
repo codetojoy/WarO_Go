@@ -31,9 +31,9 @@ func ByOffer(player *Player) int {
 	return player.offer
 }
 
-func NewPlayer(name string, whichStrategy string) Player {
+func NewPlayer(name string, strategyName string, strategyUrl string) Player {
 	ch := make(chan int)
-	return Player{name: name, strategy: strategy.BuildStrategy(whichStrategy),
+	return Player{name: name, strategy: strategy.BuildStrategy(strategyName, strategyUrl),
 		hand: NewHandNoCards(), PlayerStats: PlayerStats{}, channel: ch}
 }
 
@@ -105,8 +105,9 @@ func (player *Player) String() string {
 
 // -------- for test
 
-func BuildPlayerForTesting(name string, whichStrategy string, cards []int) Player {
-	player := NewPlayer(name, whichStrategy)
+func BuildPlayerForTesting(name string, strategyName string, cards []int) Player {
+    const noUrl = ""
+	player := NewPlayer(name, strategyName, noUrl)
 	player.SetHand(NewHand(cards))
 	return player
 }

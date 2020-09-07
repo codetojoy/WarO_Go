@@ -9,8 +9,9 @@ func BuildPlayers(config config.Config) []Player {
 
 	for _, configPlayer := range config.Players {
 		name := configPlayer.Name
-		whichStrategy := configPlayer.WhichStrategy
-		player := NewPlayer(name, whichStrategy)
+		strategyName := configPlayer.StrategyName
+		strategyUrl := configPlayer.StrategyUrl
+		player := NewPlayer(name, strategyName, strategyUrl)
 		result = append(result, player)
 	}
 

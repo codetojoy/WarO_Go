@@ -10,7 +10,7 @@ import (
 
 type PlayerConfig struct {
 	Name          string
-	WhichStrategy string
+	StrategyName string
 	StrategyUrl string
 }
 
@@ -35,7 +35,7 @@ func NewConfigFromFile(jsonFile string) Config {
 		name := jsonPlayer.Name
 		whichStrategy := jsonPlayer.StrategyName
 		strategyUrl := jsonPlayer.StrategyUrl
-		playerConfig := PlayerConfig{Name: name, WhichStrategy: whichStrategy, StrategyUrl: strategyUrl}
+		playerConfig := PlayerConfig{Name: name, StrategyName: whichStrategy, StrategyUrl: strategyUrl}
 		config.Players = append(config.Players, playerConfig)
 	}
 
@@ -61,7 +61,7 @@ func (config *Config) String() string {
 
 	for _, playerConfig := range config.Players {
 		name := playerConfig.Name
-		whichStrategy := playerConfig.WhichStrategy
+		whichStrategy := playerConfig.StrategyName
 		result.WriteString(fmt.Sprintf("name: %v strategy: %v\n", name, whichStrategy))
 	}
 

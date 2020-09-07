@@ -4,7 +4,6 @@ package strategy
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -20,6 +19,7 @@ const MODE_MAX = "max"
 const MODE_MIN = "min"
 
 type apiRemoteCard struct {
+    url string
 }
 
 type ApiRemoteResult struct {
@@ -28,11 +28,7 @@ type ApiRemoteResult struct {
 }
 
 func (arc apiRemoteCard) SelectCard(ch chan int, prizeCard int, cards []int, maxCard int) {
-	const port = 6160
-	context := "/waro/strategy"
-	urlStr := fmt.Sprintf("http://localhost:%d%v", port, context)
-	mode := "min"
-	url := buildUrl(port, urlStr, prizeCard, cards, maxCard, mode)
+	url := buildUrl(arc.url, prizeCard, cards, maxCard)
 
 	jsonStr := callServer(url)
 	card := parseJson(jsonStr)
@@ -70,7 +66,8 @@ func callServer(url string) string {
 	return result.String()
 }
 
-func buildUrl(port int, urlStr string, prizeCard int, cards []int, maxCard int, mode string) string {
+// func buildUrl(port int, urlStr string, prizeCard int, cards []int, maxCard int, mode string) string {
+func buildUrl(urlStr string, prizeCard int, cards []int, maxCard int) string {
 	req, err := http.NewRequest("GET", urlStr, nil)
 
 	if err != nil {
@@ -78,7 +75,7 @@ func buildUrl(port int, urlStr string, prizeCard int, cards []int, maxCard int, 
 	}
 
 	query := req.URL.Query()
-	query.Add(MODE_PARAM, mode)
+	// query.Add(MODE_PARAM, mode)
 	query.Add(PRIZE_CARD_PARAM, strconv.Itoa(prizeCard))
 	query.Add(MAX_CARD_PARAM, strconv.Itoa(maxCard))
 

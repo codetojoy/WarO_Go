@@ -9,9 +9,9 @@ import (
 )
 
 func TestPlayTourneyWinnerCase1(t *testing.T) {
-	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD)
-	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD)
-	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD)
+	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD, "")
+	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD, "")
+	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD, "")
 
 	players := []player.Player{p1, p2, p3}
 
@@ -41,9 +41,9 @@ func TestPlayTourneyWinnerCase1(t *testing.T) {
 }
 
 func TestPlayTourneyWinnerCase2(t *testing.T) {
-	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD)
-	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD)
-	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD)
+	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD, "")
+	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD, "")
+	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD, "")
 
 	players := []player.Player{p1, p2, p3}
 
@@ -74,9 +74,9 @@ func TestPlayTourneyWinnerCase2(t *testing.T) {
 }
 
 func TestDetermineTourneyWinner(t *testing.T) {
-	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD)
-	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD)
-	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD)
+	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD, "")
+	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD, "")
+	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD, "")
 
 	p1.PlayerStats.NumGamesWon = 0
 	p2.PlayerStats.NumGamesWon = 3

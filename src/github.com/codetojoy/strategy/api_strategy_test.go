@@ -14,10 +14,10 @@ func TestBuildUrl(t *testing.T) {
 	const context = "/waro/strategy"
 	cards := []int{3, 7, 11}
 
-	urlStr := fmt.Sprintf("http://localhost:%d%v", port, context)
+	urlStr := fmt.Sprintf("http://localhost:%d%v?mode=%v", port, context, mode)
 
 	// test
-	result := buildUrl(port, urlStr, prizeCard, cards, maxCard, mode)
+	result := buildUrl(urlStr, prizeCard, cards, maxCard)
 
 	// TODO: figure out how to use test-assert library (see README.md)
 	ok := strings.Contains(result, "http://localhost:6160/waro/strategy?")

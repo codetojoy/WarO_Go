@@ -7,7 +7,7 @@ import (
 )
 
 func TestWinsGame(t *testing.T) {
-	player := NewPlayer("mozart", strategy.NEXT_CARD)
+	player := NewPlayer("mozart", strategy.NEXT_CARD, "")
 
 	// test
 	player.WinsGame()
@@ -21,7 +21,7 @@ func TestWinsGame(t *testing.T) {
 
 func TestWinsRound(t *testing.T) {
 	const prizeCard = 10
-	player := NewPlayer("mozart", strategy.NEXT_CARD)
+	player := NewPlayer("mozart", strategy.NEXT_CARD, "")
 
 	// test
 	player.WinsRound(prizeCard)
@@ -46,7 +46,7 @@ func TestMakeOffer(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		player := NewPlayer("mozart", strategy.NEXT_CARD)
+		player := NewPlayer("mozart", strategy.NEXT_CARD, "")
 		hand := NewHand(c.inCards)
 		player.SetHand(hand)
 

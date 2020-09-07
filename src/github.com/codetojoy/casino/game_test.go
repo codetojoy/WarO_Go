@@ -8,9 +8,9 @@ import (
 )
 
 func TestDetermineGameWinner(t *testing.T) {
-	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD)
-	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD)
-	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD)
+	p1 := player.NewPlayer("beethoven", strategy.NEXT_CARD, "")
+	p2 := player.NewPlayer("chopin", strategy.NEXT_CARD, "")
+	p3 := player.NewPlayer("mozart", strategy.NEXT_CARD, "")
 
 	p1.PlayerStats.GameTotal = 18
 	p2.PlayerStats.GameTotal = 30

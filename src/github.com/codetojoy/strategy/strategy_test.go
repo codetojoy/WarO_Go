@@ -15,7 +15,7 @@ func TestNextCard(t *testing.T) {
 	const prizeCard = 10
 	cards := []int{4, 6, 8}
 	const maxCard = 12
-	strategy := BuildStrategy(NEXT_CARD)
+	strategy := BuildStrategy(NEXT_CARD, "")
 
 	// test
 	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
@@ -33,7 +33,7 @@ func TestNearestCard(t *testing.T) {
 	const prizeCard = 10
 	cards := []int{4, 6, 9, 12}
 	const maxCard = 12
-	strategy := BuildStrategy(NEAREST_CARD)
+	strategy := BuildStrategy(NEAREST_CARD, "")
 
 	// test
 	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
@@ -51,7 +51,7 @@ func TestMaxCard(t *testing.T) {
 	const prizeCard = 10
 	cards := []int{4, 11, 9}
 	const maxCard = 12
-	strategy := BuildStrategy(MAX_CARD)
+	strategy := BuildStrategy(MAX_CARD, "")
 
 	// test
 	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
@@ -69,7 +69,7 @@ func TestMinCard(t *testing.T) {
 	const prizeCard = 10
 	cards := []int{4, 6, 9, 12}
 	const maxCard = 12
-	strategy := BuildStrategy(MIN_CARD)
+	strategy := BuildStrategy(MIN_CARD, "")
 
 	// test
 	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
@@ -87,7 +87,7 @@ func TestHybrid_Max(t *testing.T) {
 	const prizeCard = 10
 	cards := []int{4, 6, 9, 12}
 	const maxCard = 12
-	strategy := BuildStrategy(HYBRID)
+	strategy := BuildStrategy(HYBRID, "")
 
 	// test
 	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
@@ -105,7 +105,7 @@ func TestHybrid_Min(t *testing.T) {
 	const prizeCard = 2
 	cards := []int{4, 6, 9, 12}
 	const maxCard = 12
-	strategy := BuildStrategy(HYBRID)
+	strategy := BuildStrategy(HYBRID, "")
 
 	// test
 	result := executeStrategySync(strategy, prizeCard, cards, maxCard)
