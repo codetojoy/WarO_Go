@@ -3,9 +3,9 @@
 "num_games": 5000,
 "is_verbose": true,
 "players": [
-    {"name": "Min Minnie", "strategy": "min_card"},
-    {"name": "Max Morty", "strategy": "max_card"},
-    {"name": "Hybrid Helen", "strategy": "hybrid"},
-    {"name": "Nearest Ned", "strategy": "nearest_card"}
+    {"name": "Min Minnie", "strategy_name": "min_card"},
+    {"name": "Max Morty", "strategy_name": "max_card"},
+    {"name": "Hybrid Helen", "strategy_name": "hybrid"},
+    {"name": "Nearest Ned", "strategy_name": "nearest_card"}
 ]
 }

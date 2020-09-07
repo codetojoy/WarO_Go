@@ -3,8 +3,8 @@
 "num_games": 1,
 "is_verbose": true,
 "players": [
-    {"name": "beethoven", "strategy": "next_card"},
-    {"name": "chopin", "strategy": "next_card"},
-    {"name": "mozart", "strategy": "next_card"}
+    {"name": "beethoven", "strategy_name": "next_card"},
+    {"name": "chopin", "strategy_name": "next_card"},
+    {"name": "mozart", "strategy_name": "next_card"}
 ]
 }

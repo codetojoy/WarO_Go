@@ -11,7 +11,8 @@ import (
 
 type JsonPlayer struct {
 	Name     string `json:"name"`
-	Strategy string `json:"strategy"`
+	StrategyName     string `json:"strategy_name"`
+	StrategyUrl     string `json:"strategy_url"`
 }
 
 type JsonConfig struct {
@@ -29,7 +30,7 @@ func (jsonConfig *JsonConfig) Log() {
 
 	for i, _ := range jsonConfig.Players {
 		player := &jsonConfig.Players[i]
-		fmt.Printf("player name: %v strategy: %v\n", player.Name, player.Strategy)
+		fmt.Printf("player name: %v strategy: %v\n", player.Name, player.StrategyName)
 	}
 }
 

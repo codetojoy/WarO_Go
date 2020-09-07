@@ -11,6 +11,7 @@ import (
 type PlayerConfig struct {
 	Name          string
 	WhichStrategy string
+	StrategyUrl string
 }
 
 type Config struct {
@@ -32,8 +33,9 @@ func NewConfigFromFile(jsonFile string) Config {
 
 	for _, jsonPlayer := range jsonConfig.Players {
 		name := jsonPlayer.Name
-		whichStrategy := jsonPlayer.Strategy
-		playerConfig := PlayerConfig{Name: name, WhichStrategy: whichStrategy}
+		whichStrategy := jsonPlayer.StrategyName
+		strategyUrl := jsonPlayer.StrategyUrl
+		playerConfig := PlayerConfig{Name: name, WhichStrategy: whichStrategy, StrategyUrl: strategyUrl}
 		config.Players = append(config.Players, playerConfig)
 	}
 
@@ -51,7 +53,6 @@ func NewConfigForTesting(numCards int, numPlayers int, numGames int) Config {
 		MaxCard: maxCard, Players: []PlayerConfig{}}
 }
 
-// String is standard functionality.
 func (config *Config) String() string {
 	result := strings.Builder{}
 

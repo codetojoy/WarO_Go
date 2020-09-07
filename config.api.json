@@ -3,7 +3,7 @@
 "num_games": 1,
 "is_verbose": true,
 "players": [
-    {"name": "you", "strategy": "console"},
-    {"name": "bach", "strategy": "api_remote"}
+    {"name": "you", "strategy_name": "console"},
+    {"name": "bach", "strategy_name": "api_remote"}
 ]
 }
