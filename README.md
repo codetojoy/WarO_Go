@@ -27,8 +27,6 @@ TODO:
     - e.g. to use a 3rd-party package such as: https://github.com/stretchr/testify
     - Since this is functional, I have to move on, as I'm more interested in
       the language than the insufferable module/package system.
-* API/remote strategy is work-in-progress 
-    - remove hard-coded bits and put into JSON config 
 * unit tests for other strategies
 * check code coverage, esp. near console strategy 
 * revisit passing pointers, esp. for Player
