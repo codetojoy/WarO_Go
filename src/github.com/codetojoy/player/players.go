@@ -26,6 +26,7 @@ func SolicitOffers(prizeCard int, players []Player, maxCard int) {
 	}
 
 	// TODO: this should probably be a select on channels ?
+    // TODO: or use a WaitGroup ?
 	for index := range players {
 		thisPlayer := &players[index]
 		thisPlayer.GetOffer()
