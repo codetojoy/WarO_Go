@@ -22,6 +22,8 @@ Rules are [here](Rules.md).
 TODO:
 ---------
 
+* Oct 2022
+    - new Github Action for test doesn't work because of a GOPATH/module problem
 * The `run.sh` and `test.sh` scripts are not idiomatic.
 * I tried to set up `GOPATH` etc but I just can't get it to work.
     - e.g. to use a 3rd-party package such as: https://github.com/stretchr/testify
